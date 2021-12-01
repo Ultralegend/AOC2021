@@ -17,4 +17,3 @@ for i in fp:
 fp.close()
 
 print(counter)
-

@@ -10,7 +10,6 @@ for i in fp:
     inputNum.append(int(i.strip()))
 fp.close()
 
-
 for i in range(0, len(inputNum)):
     if (i + 3 < len(inputNum)):
         sumA = inputNum[i] + inputNum[i + 1] + inputNum[i + 2]
@@ -20,4 +19,3 @@ for i in range(0, len(inputNum)):
             counter += 1
 
 print(counter)
-
