@@ -30,7 +30,7 @@ def getCourseAim(array):
 
     return hpos * depth
 
-fp = open("../Input/02_input2.txt", "r")
+fp = open("../Input/02_input.txt", "r")
 inputData = [i for i in fp]
 fp.close()
 

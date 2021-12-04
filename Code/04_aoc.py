@@ -1,14 +1,11 @@
 import os
 os.system("cls")
 
-def arrayToInt(array):
-    newArray = []
-    for i in array:
-        newArray.append(int(i))
-    return newArray
+def arrayToInt(array): return [int(i) for i in array]
 
-def getColumn(matrix, idx):
-    return [row[idx] for row in matrix]
+def getColumn(matrix, idx): return [row[idx] for row in matrix]
+
+def removeArray(array, remove): return [i for i in array if (i != remove)]
 
 def getScore(matrix, matches):
     unmarked = 0
@@ -17,13 +14,6 @@ def getScore(matrix, matches):
             if (j not in matches):
                 unmarked += j
     return unmarked * matches[-1]
-
-def removeArray(array, matrix):
-    newArray = []
-    for i in array:
-        if (i != matrix):
-            newArray.append(i)
-    return newArray
 
 def getWinnerScore(boards, numbers):
     increment = 1
@@ -71,7 +61,6 @@ def getLastWinner(boards, numbers):
         increment += 1
     
     return getScore(winBoard[-1], matchNums)
-
 
 fp = open("../Input/04_input.txt").read()
 
