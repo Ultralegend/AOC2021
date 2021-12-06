@@ -3,13 +3,40 @@ os.system("cls")
 
 def arrayToInt(array): return [int(i) for i in array]
 
-def removeArray(array, remove): return [i for i in array if (i != remove)]
+def getFishCount(data, limit):
+    dayCounter = 1
+    fishCount = {}
 
-fp = open("../Input/06_input.txt", "r")
+    for i in range(9):
+        fishCount[i] = 0
 
-inputNum = []
-for i in fp: 
-    inputNum.append(i)
+    for i in data:
+        fishCount[i] += 1
 
-fp.close()
-print(inputNum)
+    while (dayCounter <= limit):
+        newFish = 0
+
+        for i in fishCount.keys():
+            if (fishCount[i] != 0):
+
+                if (i): 
+                    fishCount[i-1] += fishCount[i]
+                else: 
+                    newFish = fishCount[i]
+                
+                fishCount[i] = 0
+
+        fishCount[8] += newFish
+        fishCount[6] += newFish
+        
+        dayCounter += 1
+
+    return (sum(fishCount.values()))
+
+
+fp = open("../Input/06_input.txt", "r").read().split(",")
+
+inputNum = arrayToInt(fp)
+
+print(getFishCount(inputNum, 80))
+print(getFishCount(inputNum, 256))

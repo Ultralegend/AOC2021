@@ -1,6 +1,5 @@
 import os
 os.system("cls")
-print("\n\nNEW INPUT\n")
 
 def arrayToInt(array): return [int(i) for i in array]
 
