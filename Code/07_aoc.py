@@ -4,12 +4,43 @@ print("\n\nNEW INPUT\n")
 
 def arrayToInt(array): return [int(i) for i in array]
 
-def removeArray(array, remove): return [i for i in array if (i != remove)]
+def getFuel(data):
+    minFuel = -1
+    
+    for i in range(1, max(data)):
+        fuel = 0
 
-fp = open("../Input/07_input.txt", "r").read()
+        for j in data:
+            fuel += abs(i - j)
 
-inputNum = []
-for i in fp.split("\n"): 
-    inputNum.append(i)
+            if (minFuel != -1 and fuel >= minFuel): break
 
-print(inputNum)
+        if (minFuel == -1 or fuel < minFuel):
+            minFuel = fuel
+
+    return minFuel
+
+def getFuel2(data):
+    minFuel = -1
+    
+    for i in range(1, max(data)):
+        fuel = 0
+
+        for j in data:
+            fuel += sum(range(abs(i - j) + 1))
+
+            if (minFuel != -1 and fuel >= minFuel): break
+
+        if (minFuel == -1 or fuel < minFuel):
+            minFuel = fuel
+
+    return minFuel
+
+
+fp = open("../Input/07_input.txt", "r").read().split(",")
+
+inputNum = arrayToInt(fp)
+
+print(getFuel(inputNum))
+print(getFuel2(inputNum))
+

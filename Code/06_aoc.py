@@ -17,14 +17,12 @@ def getFishCount(data, limit):
         newFish = 0
 
         for i in fishCount.keys():
-            if (fishCount[i] != 0):
-
-                if (i): 
-                    fishCount[i-1] += fishCount[i]
-                else: 
-                    newFish = fishCount[i]
-                
-                fishCount[i] = 0
+            if (i): 
+                fishCount[i-1] += fishCount[i]
+            else: 
+                newFish = fishCount[i]
+            
+            fishCount[i] = 0
 
         fishCount[8] += newFish
         fishCount[6] += newFish
