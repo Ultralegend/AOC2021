@@ -31,7 +31,7 @@ def getPaths2(graph, start, record, path):
     
     return record
 
-fp = open("../Input/12_input2.txt", "r").read().split("\n")
+fp = open("../Input/12_input.txt", "r").read().split("\n")
 
 inputNum = [i.split("-") for i in fp]
 
