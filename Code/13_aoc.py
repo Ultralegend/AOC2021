@@ -24,10 +24,10 @@ def foldBoard(board, foldIns):
         x = int(x)
 
         for i, j in board:
-            if "y" in fold:
-                j = x - abs((j - x))
-            elif "x" in fold:
-                i = x - abs((i - x))
+            if "y" in fold and j > x:
+                j = abs(x * 2 - j)
+            elif "x" in fold and i > x:
+                i = abs(x * 2 - i)
             newBoard.add((i,j))
         
         if dots == 0: dots = len(newBoard)

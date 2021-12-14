@@ -1,18 +1,65 @@
 import os
-import math
-import re
-
 os.system("cls")
-print("\n\nNEW INPUT\n")
 
-def arrayToInt(array): return [int(i) for i in array]
+def getPolymerChart(chart, rules, limit):
+    stepCount = 1
 
-def inc2dArray(array, x = 1): return [[j + x for j in i] for i in array]
+    while stepCount <= limit:
+        stepCount += 1
+        newDict = {}
 
-fp = open("../Input/14_input.txt", "r").read().split("\n")
+        for i, j in chart.items():
+            if (chart[i] == 0): continue
+            i = str(i)
 
-inputNum = []
-for i in fp: 
-    inputNum.append(i)
+            pair1 = i[0] + rules[i][-1]
+            pair2 = rules[i][0] + i[-1]
+            
+            if pair1 not in newDict:
+                newDict[pair1] = j
+            else:
+                newDict[pair1] += j
 
-print(inputNum)
+            if pair2 not in newDict:
+                newDict[pair2] = j
+            else:
+                newDict[pair2] += j
+        
+        chart = newDict
+
+    return chart
+
+def getPolymerCount(chart, string):
+    polyCount = {}
+    polyCount[string[-1]] = 1
+
+    for i, j in chart.items():
+        i = str(i)
+
+        if i[0] not in polyCount:
+            polyCount[i[0]] = j 
+        else:
+            polyCount[i[0]] += j
+
+    return max(polyCount.values()) - min(polyCount.values())
+
+fp = open("../Input/14_input.txt", "r").read().split("\n\n")
+
+inputString = fp[0].strip()
+
+inputNum = {}
+for i in fp[1].split("\n"):
+    x, y = (i.split(" -> "))
+    inputNum[x] = y
+
+chart = {}
+for i in range(len(inputString) - 1):
+    newEntry = inputString[i] + inputString[i + 1]
+
+    if newEntry not in chart:
+        chart[newEntry] = 1
+    else:
+        chart[newEntry] += 1
+
+print(getPolymerCount(getPolymerChart(chart, inputNum, 10), inputString))
+print(getPolymerCount(getPolymerChart(chart, inputNum, 40), inputString))
