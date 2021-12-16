@@ -157,7 +157,7 @@ def evalOperatorPacket(bits):
     else:
         print(results[0])
 
-fp = open("../Input/16_input.txt", "r").read().strip()
+fp = open("../Input/16_input2.txt", "r").read().strip()
 
 inputNum = bin(int(fp, 16))[2:]
 inputNum = "0" * (len(fp) * 4 - len(inputNum)) + inputNum
