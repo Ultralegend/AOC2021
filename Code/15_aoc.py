@@ -5,8 +5,6 @@ os.system("cls")
 
 def arrayToInt(array): return [int(i) for i in array]
 
-def inc2dArray(array, x = 1): return [[j + x for j in i] for i in array]
-
 def checkSides(array, c):
     neighbors = []
 
@@ -24,9 +22,11 @@ def checkSides(array, c):
 
     return neighbors
 
-def djikstra(array, start):
+def DijkstraAlgo(array, start):
+    pathRec = {}
     distRec = {}
     distRec[(start[0], start[1])] = 0
+    pathRec[(start[0], start[1])] = 0
     pq = []
     hq.heappush(pq, [0, start])
 
@@ -40,9 +40,11 @@ def djikstra(array, start):
 
             if (i[0], i[1]) not in distRec or newDist < distRec[(i[0], i[1])]:
                 distRec[(i[0], i[1])] = newDist
+                pathRec[(i[0], i[1])] = (index[0], index[1])
                 hq.heappush(pq, [newDist, i])
 
     print(distRec[(len(array) - 1, len(array[0]) - 1)])
+    return pathRec
 
 def expandArray(array):
     nb = array.copy()
@@ -81,5 +83,5 @@ fp = open("../Input/15_input.txt", "r").read().split("\n")
 inputNum = [i for i in fp]
 newArray = expandArray(inputNum)
 
-djikstra(inputNum, [0,0])
-djikstra(newArray, [0,0])
+DijkstraAlgo(inputNum, [0,0])
+DijkstraAlgo(newArray, [0,0])
