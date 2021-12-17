@@ -31,9 +31,10 @@ def getLiteralValue(bits):
     
     return [currentIdx, packetVer, int(literal, 2)]
 
-def evalOperatorPacket(bits, currentIdx):
+def evalOperatorPacket(bits):
     packetVer = int(bits[0:3], 2)
     typeId = int(bits[3:6] , 2)
+    currentIdx = 0
     operands = []
 
     lengthId = 15 if bits[6] == "0" else 11
@@ -48,7 +49,7 @@ def evalOperatorPacket(bits, currentIdx):
             if tI == 4:
                 retVal = getLiteralValue(bits[currentIdx:])
             else: 
-                retVal = evalOperatorPacket(bits[currentIdx:], 0)
+                retVal = evalOperatorPacket(bits[currentIdx:])
             
             currentIdx += retVal[0]
             packetVer += retVal[1]
@@ -63,7 +64,7 @@ def evalOperatorPacket(bits, currentIdx):
             if tI == 4:
                 retVal = getLiteralValue(bits[currentIdx:])
             else: 
-                retVal = evalOperatorPacket(bits[currentIdx:], 0)
+                retVal = evalOperatorPacket(bits[currentIdx:])
             
             currentIdx += retVal[0]
             packetVer += retVal[1]
@@ -83,5 +84,5 @@ def evalOperatorPacket(bits, currentIdx):
 
 fp = open("../Input/16_input.txt", "r").read().strip()
 
-result = evalOperatorPacket(hextobin(fp), 0)
-print(result[1], result[2])
+_, packet, result = evalOperatorPacket(hextobin(fp))
+print(packet, result)
