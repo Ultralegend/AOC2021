@@ -39,18 +39,15 @@ inputX, inputY = fp.split(", ")
 inputX = arrayToInt(inputX[15:].split(".."))
 inputY = arrayToInt(inputY[2:].split(".."))
 
-yBound = abs(min(inputY))
 maxHeight = 0
 count = 0
 
 for i in range(getXbound(inputX), max(inputX) + 1):
-    for j in range(min(inputY), yBound):
+    for j in range(min(inputY), abs(min(inputY))):
         curHeight = checkLanding([i,j], inputX, inputY)
         
         if curHeight != -1: count += 1
-        if curHeight > maxHeight: 
-            maxHeight = curHeight
-            yBound = j + 1
+        if curHeight > maxHeight: maxHeight = curHeight
 
 print(maxHeight)
 print(count)
